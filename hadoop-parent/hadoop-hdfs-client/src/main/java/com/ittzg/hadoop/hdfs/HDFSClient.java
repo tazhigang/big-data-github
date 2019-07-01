@@ -65,7 +65,7 @@ public class HDFSClient {
     @Test
     public void putFileToHDFS(){
         try {
-            fileSystem.copyFromLocalFile(new Path("J:\\word.txt"),new Path("/user/hadoop/input/hello.txt"));
+            fileSystem.copyFromLocalFile(new Path("J:\\word.txt"),new Path("/user/hadoop/input/word.txt"));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -121,6 +121,10 @@ public class HDFSClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @Test
+    public void rmFile() throws IOException {
+        fileSystem.delete(new Path("/user/hadoop/input/hello.txt"),true);
     }
     @Test
     public void testDownload() throws IOException {

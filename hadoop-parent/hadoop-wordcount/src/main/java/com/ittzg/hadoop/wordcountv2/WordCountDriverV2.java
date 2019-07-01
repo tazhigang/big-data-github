@@ -41,7 +41,7 @@ public class WordCountDriverV2 {
 
         FileSystem fs = FileSystem.get(new URI("hdfs://hadoop-ip-101:9000"),configuration,"hadoop");
         // 以下是为了解决 WordCountMapperV2和WordCountReduceV2找不到的异常，需要设置jar在本地的路径
-        job.setJar("F:\\big-data-github\\hadoop-parent\\hadoop-wordcount\\target\\hadoop-wordcount-1.0-SNAPSHOT.jar");
+        job.setJar("/big-data-github/hadoop-parent/hadoop-wordcount/target/hadoop-wordcount-1.0-SNAPSHOT.jar");
         job.setJobName("wordCount");
 
         // 3. 设置mapper和reduce的class类

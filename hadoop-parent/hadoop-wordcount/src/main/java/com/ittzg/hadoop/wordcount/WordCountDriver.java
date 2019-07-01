@@ -6,9 +6,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.*;
-import org.apache.hadoop.mapreduce.Job;
 
-import java.io.IOException;
 
 /**
  * @email: tazhigang095@163.com
