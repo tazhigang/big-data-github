@@ -17,6 +17,7 @@
     <modules>
         <module>hadoop-hdfs-client</module>
         <module>hadoop-wordcount</module>
+        <module>hadoop-flowcount</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs -->
