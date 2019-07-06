@@ -9,6 +9,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.input.CombineTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
@@ -43,7 +44,7 @@ public class WordCountV3Driver {
     }
     public static void main(String[] args) throws Exception {
         String input = "hdfs://hadoop-ip-101:9000/user/hadoop/input";
-        String output = "hdfs://hadoop-ip-101:9000/user/hadoop/output/v3";
+        String output = "hdfs://hadoop-ip-101:9000/user/hadoop/output/v4";
         Configuration configuration = new Configuration();
         configuration.addResource("core-site.xml");
         configuration.addResource("hdfs-site.xml");
@@ -73,11 +74,14 @@ public class WordCountV3Driver {
         // 5. 设置最终输出的数据类型
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
+//        // 处理小文件切片
+//        job.setInputFormatClass(CombineTextInputFormat.class);
+//        CombineTextInputFormat.setMaxInputSplitSize(job, 4194304);// 4m
+//        CombineTextInputFormat.setMinInputSplitSize(job, 2097152);// 2m
         // 6. 设置输入数据和输出数据的路径
         FileInputFormat.setInputPaths(job,new Path(input));
         FileOutputFormat.setOutputPath(job,outPath);
         // 7 将job中配置的相关参数，以及job所用的java类所在的jar包， 提交给yarn去运行
-		job.submit();
         boolean result = job.waitForCompletion(true);
         System.exit(result?0:1);
     }

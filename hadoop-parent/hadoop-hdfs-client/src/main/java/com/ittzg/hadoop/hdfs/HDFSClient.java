@@ -124,7 +124,7 @@ public class HDFSClient {
     }
     @Test
     public void rmFile() throws IOException {
-        fileSystem.delete(new Path("/user/hadoop/input/hello.txt"),true);
+        fileSystem.delete(new Path("/user/hadoop/order/input/order.txt"),true);
     }
     @Test
     public void testDownload() throws IOException {

@@ -1,4 +1,4 @@
-package com.ittzg.hadoop.flow;
+package com.ittzg.hadoop.flowv2;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -21,7 +21,7 @@ import java.net.URISyntaxException;
  * @date: 2019/7/1 22:49
  * @describe:
  */
-public class FlowDriver {
+public class FlowDriverV2 {
     public static class FlowMapper extends Mapper<LongWritable,Text,Text,FlowBean>{
         @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
@@ -55,12 +55,12 @@ public class FlowDriver {
     public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException, ClassNotFoundException {
         // 设置输入输出路径
         String input = "hdfs://hadoop-ip-101:9000/user/hadoop/flow/input";
-        String output = "hdfs://hadoop-ip-101:9000/user/hadoop/flow/output";
+        String output = "hdfs://hadoop-ip-101:9000/user/hadoop/flow/v2output";
         Configuration conf = new Configuration();
         conf.set("mapreduce.app-submission.cross-platform","true");
         Job job = Job.getInstance(conf);
-
-        job.setJar("/big-data-github/hadoop-parent/hadoop-flowcount/target/hadoop-flowcount-1.0-SNAPSHOT.jar");
+        //
+        job.setJar("/big-data-github/hadoop-parent/hadoop-flowcount-v2/target/hadoop-flowcount-v2-1.0-SNAPSHOT.jar");
 
         job.setMapperClass(FlowMapper.class);
         job.setReducerClass(FlowReduce.class);
@@ -76,6 +76,11 @@ public class FlowDriver {
         if(fs.exists(outPath)){
             fs.delete(outPath,true);
         }
+        // 设置分区
+        job.setPartitionerClass(FlowPartition.class);
+        // 设置reduceTask个数
+        job.setNumReduceTasks(4);
+
         FileInputFormat.addInputPath(job,new Path(input));
         FileOutputFormat.setOutputPath(job,outPath);
 

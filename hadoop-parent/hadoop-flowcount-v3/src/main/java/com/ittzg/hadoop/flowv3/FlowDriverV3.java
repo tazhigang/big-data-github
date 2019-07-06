@@ -1,4 +1,4 @@
-package com.ittzg.hadoop.flow;
+package com.ittzg.hadoop.flowv3;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -21,8 +21,8 @@ import java.net.URISyntaxException;
  * @date: 2019/7/1 22:49
  * @describe:
  */
-public class FlowDriver {
-    public static class FlowMapper extends Mapper<LongWritable,Text,Text,FlowBean>{
+public class FlowDriverV3 {
+    public static class FlowMapper extends Mapper<LongWritable,Text,FlowBean,Text>{
         @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             // 获取一行数据
@@ -33,40 +33,33 @@ public class FlowDriver {
             long downFlow = Long.parseLong(split[split.length-2]);
             // 构造FlowBean
             FlowBean flowBean = new FlowBean(upFlow, downFlow);
-            context.write(new Text(split[1]),flowBean);
+            System.out.println(flowBean);
+            context.write(flowBean,new Text(split[1]));
         }
     }
 
-    public static class FlowReduce extends Reducer<Text,FlowBean,Text,FlowBean>{
+    public static class FlowReduce extends Reducer<FlowBean,Text,Text,FlowBean>{
         @Override
-        protected void reduce(Text key, Iterable<FlowBean> values, Context context) throws IOException, InterruptedException {
-            long upFlow = 0;
-            long downFlow =  0;
-            for (FlowBean flowBean : values) {
-                upFlow += flowBean.getUpFlow();
-                downFlow +=flowBean.getDownFlow();
-            }
-
-            FlowBean flowBean = new FlowBean(upFlow, downFlow);
-            context.write(new Text(key),flowBean);
+        protected void reduce(FlowBean key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+            context.write(new Text(values.iterator().next()),key);
         }
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException, ClassNotFoundException {
         // 设置输入输出路径
         String input = "hdfs://hadoop-ip-101:9000/user/hadoop/flow/input";
-        String output = "hdfs://hadoop-ip-101:9000/user/hadoop/flow/output";
+        String output = "hdfs://hadoop-ip-101:9000/user/hadoop/flow/v3output";
         Configuration conf = new Configuration();
         conf.set("mapreduce.app-submission.cross-platform","true");
         Job job = Job.getInstance(conf);
-
-        job.setJar("/big-data-github/hadoop-parent/hadoop-flowcount/target/hadoop-flowcount-1.0-SNAPSHOT.jar");
+        //
+        job.setJar("F:\\big-data-github\\hadoop-parent\\hadoop-flowcount-v3\\target\\hadoop-flowcount-v3-1.0-SNAPSHOT.jar");
 
         job.setMapperClass(FlowMapper.class);
         job.setReducerClass(FlowReduce.class);
 
-        job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(FlowBean.class);
+        job.setMapOutputKeyClass(FlowBean.class);
+        job.setMapOutputValueClass(Text.class);
 
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(FlowBean.class);
@@ -76,6 +69,7 @@ public class FlowDriver {
         if(fs.exists(outPath)){
             fs.delete(outPath,true);
         }
+
         FileInputFormat.addInputPath(job,new Path(input));
         FileOutputFormat.setOutputPath(job,outPath);
 
