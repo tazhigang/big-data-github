@@ -50,7 +50,7 @@ public class HDFSUtil {
     @Test
     public void putFileToHDFS(){
         try {
-//            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-order-product\\src\\main\\resources\\file\\order.txt"),new Path("/user/hadoop/order_product/input/order.txt"));
+            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-order-product\\src\\main\\resources\\file\\order.txt"),new Path("/user/hadoop/order_product/input/order.txt"));
             fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-order-product\\src\\main\\resources\\file\\pd.txt"),new Path("/user/hadoop/order_product/input/pd.txt"));
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,8 +71,8 @@ public class HDFSUtil {
         }
     }
 
-    @Test
-    public void rmFile() throws IOException {
-        fileSystem.delete(new Path("/user/hadoop/order_product/input/pd.txt"),true);
-    }
+//    @Test
+//    public void rmFile() throws IOException {
+//        fileSystem.delete(new Path("/user/hadoop/order_product/input/pd.txt"),true);
+//    }
 }

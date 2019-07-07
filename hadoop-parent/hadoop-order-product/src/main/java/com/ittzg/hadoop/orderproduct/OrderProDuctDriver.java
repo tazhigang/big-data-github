@@ -33,7 +33,7 @@ public class OrderProDuctDriver {
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             String line = value.toString();
             FileSplit inputSplit = (FileSplit) context.getInputSplit();
-            String fileName = inputSplit.getPath().getName();
+            String fileName = inputSplit.getPath().getName(); //获取切片名称
             String[] split = line.split("\t");
             if(fileName.contains("order")){
                 orderAndProductBean.setOrderId(split[0]);
@@ -43,7 +43,7 @@ public class OrderProDuctDriver {
                 orderAndProductBean.setFlag("0");
                 text.set(split[1]);
             }else{
-                orderAndProductBean.setOrderId("");
+                orderAndProductBean.setOrderId(""); //必须设置为空串，否则或报空指针异常
                 orderAndProductBean.setAccount("");
                 orderAndProductBean.setPdId(split[0]);
                 orderAndProductBean.setPdName(split[1]);

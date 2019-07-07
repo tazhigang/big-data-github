@@ -91,6 +91,6 @@ public class OrderAndProductBean implements WritableComparable<OrderAndProductBe
         this.flag = input.readUTF();
     }
     public int compareTo(OrderAndProductBean o) {
-        return -1;
+        return 1;
     }
 }

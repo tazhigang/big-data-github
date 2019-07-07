@@ -12,7 +12,7 @@ import java.util.Map;
  * @date: 2019/7/6 16:31
  */
 public class OrderPatitioner extends Partitioner<OrderBean,NullWritable> {
-    volatile int count = -1;
+    volatile int count = -1; // 方便计算分区数，实现动态计算
     volatile Map<String,Integer> map= new HashMap<String,Integer>();
     public int getPartition(OrderBean orderBean, NullWritable nullWritable, int numPartitions) {
         if(map.containsKey(orderBean.getOrderId())){
