@@ -1,4 +1,4 @@
-package com.ittzg.hadoop.orderproduct;
+package com.ittzg.hadoop.inputformat;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -50,8 +50,9 @@ public class HDFSUtil {
     @Test
     public void putFileToHDFS(){
         try {
-            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-order-product\\src\\main\\resources\\file\\order.txt"),new Path("/user/hadoop/order_product/input/order.txt"));
-            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-order-product\\src\\main\\resources\\file\\pd.txt"),new Path("/user/hadoop/order_product/input/pd.txt"));
+            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-inputformat\\src\\main\\resources\\file\\test01.txt"),new Path("/user/hadoop/inputformat/input/test01.txt"));
+            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-inputformat\\src\\main\\resources\\file\\test02.txt"),new Path("/user/hadoop/inputformat/input/test02.txt"));
+            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-inputformat\\src\\main\\resources\\file\\test03.txt"),new Path("/user/hadoop/inputformat/input/test03.txt"));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -64,15 +65,10 @@ public class HDFSUtil {
     @Test
     public void mkdirAtHDFS(){
         try {
-            boolean mkdirs = fileSystem.mkdirs(new Path("/user/hadoop/order_product/input"));
+            boolean mkdirs = fileSystem.mkdirs(new Path("/user/hadoop/inputformat/input"));
             System.out.println(mkdirs);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-//    @Test
-//    public void rmFile() throws IOException {
-//        fileSystem.delete(new Path("/user/hadoop/order_product/input/pd.txt"),true);
-//    }
 }

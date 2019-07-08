@@ -22,6 +22,8 @@
         <module>hadoop-flowcount-v3</module>
         <module>hadoop-order</module>
         <module>hadoop-order-product</module>
+        <module>hadoop-inputformat</module>
+        <module>hadoop-outputformat</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs -->

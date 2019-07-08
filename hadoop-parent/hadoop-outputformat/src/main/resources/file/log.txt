@@ -1,0 +1,9 @@
+https://www.baidu.com
+http://news.baidu.com
+https://map.baidu.com
+http://www.google.com
+http://cn.bing.com
+http://www.sohu.com
+http://www.sina.com
+https://github.com
+https://my.oschina.net

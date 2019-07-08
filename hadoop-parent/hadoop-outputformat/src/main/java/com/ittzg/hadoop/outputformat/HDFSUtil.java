@@ -1,4 +1,4 @@
-package com.ittzg.hadoop.orderproduct;
+package com.ittzg.hadoop.outputformat;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -13,7 +13,7 @@ import java.net.URI;
 /**
  * @email: tazhigang095@163.com
  * @author: ittzg
- * @date: 2019/7/6 20:44
+ * @date: 2019/7/7 22:54
  */
 public class HDFSUtil {
     Configuration configuration = new Configuration();
@@ -50,8 +50,7 @@ public class HDFSUtil {
     @Test
     public void putFileToHDFS(){
         try {
-            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-order-product\\src\\main\\resources\\file\\order.txt"),new Path("/user/hadoop/order_product/input/order.txt"));
-            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-order-product\\src\\main\\resources\\file\\pd.txt"),new Path("/user/hadoop/order_product/input/pd.txt"));
+            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-outputformat\\src\\main\\resources\\file\\log.txt"),new Path("/user/hadoop/outputformat/input/log.txt"));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -64,15 +63,10 @@ public class HDFSUtil {
     @Test
     public void mkdirAtHDFS(){
         try {
-            boolean mkdirs = fileSystem.mkdirs(new Path("/user/hadoop/order_product/input"));
+            boolean mkdirs = fileSystem.mkdirs(new Path("/user/hadoop/outputformat/input"));
             System.out.println(mkdirs);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-//    @Test
-//    public void rmFile() throws IOException {
-//        fileSystem.delete(new Path("/user/hadoop/order_product/input/pd.txt"),true);
-//    }
 }
