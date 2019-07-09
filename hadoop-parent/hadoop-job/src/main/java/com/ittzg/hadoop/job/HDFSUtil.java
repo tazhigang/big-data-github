@@ -1,4 +1,4 @@
-package com.ittzg.hadoop.outputformat;
+package com.ittzg.hadoop.job;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -13,7 +13,7 @@ import java.net.URI;
 /**
  * @email: tazhigang095@163.com
  * @author: ittzg
- * @date: 2019/7/7 22:54
+ * @date: 2019/7/8 23:35
  */
 public class HDFSUtil {
     Configuration configuration = new Configuration();
@@ -50,7 +50,9 @@ public class HDFSUtil {
     @Test
     public void putFileToHDFS(){
         try {
-            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-outputformat\\src\\main\\resources\\file\\baselog.txt"),new Path("/user/hadoop/outputformat/input/baselog.txt"));
+            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-job\\src\\main\\resources\\file\\a.txt"),new Path("/user/hadoop/job/input/a.txt"));
+//            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-job\\src\\main\\resources\\file\\b.txt"),new Path("/user/hadoop/job/input/b.txt"));
+//            fileSystem.copyFromLocalFile(new Path("F:\\big-data-github\\hadoop-parent\\hadoop-job\\src\\main\\resources\\file\\c.txt"),new Path("/user/hadoop/job/input/c.txt"));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -63,10 +65,14 @@ public class HDFSUtil {
     @Test
     public void mkdirAtHDFS(){
         try {
-            boolean mkdirs = fileSystem.mkdirs(new Path("/user/hadoop/outputformat/input"));
+            boolean mkdirs = fileSystem.mkdirs(new Path("/user/hadoop/job/input"));
             System.out.println(mkdirs);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @Test
+    public void rmFile() throws IOException {
+        fileSystem.delete(new Path("/user/hadoop/job/input/a.txt"),true);
     }
 }

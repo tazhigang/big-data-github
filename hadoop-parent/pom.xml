@@ -24,6 +24,9 @@
         <module>hadoop-order-product</module>
         <module>hadoop-inputformat</module>
         <module>hadoop-outputformat</module>
+        <module>hadoop-log-analysis-base</module>
+        <module>hadoop-job</module>
+        <module>hadoop-friends</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs -->
