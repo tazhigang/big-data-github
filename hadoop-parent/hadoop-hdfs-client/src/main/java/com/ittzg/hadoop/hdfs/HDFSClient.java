@@ -128,13 +128,13 @@ public class HDFSClient {
     }
     @Test
     public void testDownload() throws IOException {
-        URL url = new URL("https://oscimg.oschina.net/oscnet/3ee44cb5de42b5fa57079de388b2ce9e911.jpg");
+        URL url = new URL("http://qa-ytt.baiwang.com/title/saomakaipiao/previewInvoice.html?param=D3F4046D33B9F32C24FCACA22FB4855D6BD114C176A9DBB60842B5728AACBFE2");
         URLConnection conn = url.openConnection();
         conn.setConnectTimeout(5*1000);
         InputStream inputStream = conn.getInputStream();
         byte[] bs = new byte[1024];
         int len;
-        File file = new File("J://a.jpg");
+        File file = new File("J://b.jpg");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         while((len=inputStream.read(bs))!=-1){
             fileOutputStream.write(bs,0,len);
