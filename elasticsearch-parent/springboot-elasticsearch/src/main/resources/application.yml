@@ -1,0 +1,6 @@
+spring:
+  data:
+    elasticsearch:
+      cluster-name: my-elasticsearch
+      ##9300是服务端ip，9200是浏览器客户端端口,9100是head插件的客户端端口
+      cluster-nodes: 192.168.0.120:9300

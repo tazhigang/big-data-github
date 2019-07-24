@@ -8,8 +8,10 @@
     <artifactId>elasticsearch-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>elasticsearch-client</module>
+        <module>springboot-elasticsearch</module>
     </modules>
 
     <dependencies>
